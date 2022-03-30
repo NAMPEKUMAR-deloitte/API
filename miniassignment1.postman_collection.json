@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "bf8aa03d-94a6-40d8-8309-a6c321e0f3e1",
+		"name": "miniassignment1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Status code is 200\",function (){\r\n    pm.response.to.have.status(200);\r\n})"
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);});\r",
+							"    pm.test(\"response time is less than 400ms\", function()\r",
+							"    {\r",
+							"        pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"    });\r",
+							"    pm.test(\"Body is correct\", function ()\r",
+							"      {   pm.response.to.have.jsonBody;\r",
+							"    });\r",
+							"    pm.test(\"verify successful creation of data\",function()\r",
+							"       {     var response = pm.response.json();\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":{{name}},\r\n    \"job\":{{job}}\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let Response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"User with 'id' 40 has 'userId'=4\",function()\r",
+							"\r",
+							"{\r",
+							"\r",
+							"let userId=4;\r",
+							"\r",
+							" for(let i=0;i<Response.length;i++)\r",
+							"\r",
+							" {\r",
+							"\r",
+							"     if(Response[i].id==40)\r",
+							"\r",
+							"        {\r",
+							"\r",
+							"            pm.expect(Response[i].userId).to.eql(userId);\r",
+							"\r",
+							"        }\r",
+							"\r",
+							"    }\r",
+							"\r",
+							"});\r",
+							"\r",
+							"//scenario B\r",
+							"\r",
+							"pm.test(\"Every user contains 'title' and its type is String\",function()\r",
+							"\r",
+							"{\r",
+							"\r",
+							"for(let j=0;j<Response.length;j++)\r",
+							"\r",
+							"{\r",
+							"\r",
+							"    let type=Response[j].title\r",
+							"\r",
+							"    pm.expect(typeof(type)).to.eql(\"string\")\r",
+							"\r",
+							"}\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is json\", function () {\r",
+							"\r",
+							"    pm.response.to.have.jsonBody;\r",
+							"\r",
+							"});\r",
+							" \r",
+							" \r",
+							"let Response = pm.response.json();\r",
+							"console.log(Response.name);\r",
+							"pm.test(\"verified name and job\",function(){\r",
+							"for(let i=0;i<Response.length;i++){\r",
+							"pm.expect(Response.name).to.eql(\"Arun\");\r",
+							"pm.expect(Response.job).to.eql(\"Manager\");\r",
+							"\r",
+							" }\r",
+							"\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
